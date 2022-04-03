@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music player</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+        integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+        crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+    <div class="player">
+        <!-- Dashboard -->
+        <div class="dashboard">
+            <!-- Header -->
+            <header>
+                <h4>Now playing:</h4>
+                <h2>String 57th & 9th</h2>
+            </header>
+
+            <!-- CD -->
+            <div class="cd">
+                <div class="cd-thumb"
+                    style="background-image: url('https://i.ytimg.com/vi/jTLhQf5KJSc/maxresdefault.jpg')">
+                </div>
+            </div>
+
+            <!-- Control -->
+            <div class="control">
+                <div class="btn btn-repeat">
+                    <i class="fas fa-redo"></i>
+                </div>
+                <div class="btn btn-prev">
+                    <i class="fas fa-step-backward"></i>
+                </div>
+                <div class="btn btn-toggle-play">
+                    <i class="fas fa-pause icon-pause"></i>
+                    <i class="fas fa-play icon-play"></i>
+                </div>
+                <div class="btn btn-next">
+                    <i class="fas fa-step-forward"></i>
+                </div>
+                <div class="btn btn-random">
+                    <i class="fas fa-random"></i>
+                </div>
+            </div>
+
+            <input id="progress" class="progress" type="range" value="0" step="1" min="0" max="100">
+
+            <audio id="audio" src=""></audio>
+        </div>
+
+        <!-- Playlist -->
+        <div class="playlist">
+            <!-- <div class="song">
+                <div class="thumb"
+                    style="background-image: url('https://i.ytimg.com/vi/jTLhQf5KJSc/maxresdefault.jpg')">
+                </div>
+                <div class="body">
+                    <h3 class="title">Music name</h3>
+                    <p class="author">Singer</p>
+                </div>
+                <div class="option">
+                    <i class="fas fa-ellipsis-h"></i>
+                </div>
+            </div> -->
+        </div>
+    </div>
+    <script>
+        const $ = document.querySelector.bind(document);
+        const $$ = document.querySelectorAll.bind(document);
+        const cd = $('.cd');
+        const heading = $("header h2");
+        const cd_thumb = $(".cd-thumb");
+        const audio = $("#audio");
+        const btnPlaying = $('.btn-toggle-play');
+        const player = $('.player');
+        const progress = $('#progress');
+        const app = {
+            currentIndex: 0,
+            isPlaying: false,
+            songs: [
+                {
+                    name: "Click Pow Get Down",
+                    singer: "Raftaar x Fortnite",
+                    path: "https://mp3.filmisongs.com/go.php?id=Damn%20Song%20Raftaar%20Ft%20KrSNa.mp3",
+                    image: "https://i.ytimg.com/vi/jTLhQf5KJSc/maxresdefault.jpg"
+                },
+                {
+                    name: "Tu Phir Se Aana",
+                    singer: "Raftaar x Salim Merchant x Karma",
+                    path: "https://mp3.filmisongs.com/go.php?id=Damn%20Song%20Raftaar%20Ft%20KrSNa.mp3",
+                    image:
+                        "https://1.bp.blogspot.com/-kX21dGUuTdM/X85ij1SBeEI/AAAAAAAAKK4/feboCtDKkls19cZw3glZWRdJ6J8alCm-gCNcBGAsYHQ/s16000/Tu%2BAana%2BPhir%2BSe%2BRap%2BSong%2BLyrics%2BBy%2BRaftaar.jpg"
+                },
+                {
+                    name: "Naachne Ka Shaunq",
+                    singer: "Raftaar x Brobha V",
+                    path:
+                        "https://mp3.filmisongs.com/go.php?id=Damn%20Song%20Raftaar%20Ft%20KrSNa.mp3",
+                    image: "https://i.ytimg.com/vi/QvswgfLDuPg/maxresdefault.jpg"
+                },
+                {
+                    name: "Mantoiyat",
+                    singer: "Raftaar x Nawazuddin Siddiqui",
+                    path: "https://mp3.filmisongs.com/go.php?id=Damn%20Song%20Raftaar%20Ft%20KrSNa.mp3",
+                    image:
+                        "https://a10.gaanacdn.com/images/song/39/24225939/crop_480x480_1536749130.jpg"
+                },
+                {
+                    name: "Aage Chal",
+                    singer: "Raftaar",
+                    path: "https://mp3.filmisongs.com/go.php?id=Damn%20Song%20Raftaar%20Ft%20KrSNa.mp3",
+                    image:
+                        "https://a10.gaanacdn.com/images/albums/72/3019572/crop_480x480_3019572.jpg"
+                },
+                {
+                    name: "Damn",
+                    singer: "Raftaar x kr$na",
+                    path:
+                        "https://mp3.filmisongs.com/go.php?id=Damn%20Song%20Raftaar%20Ft%20KrSNa.mp3",
+                    image:
+                        "https://a10.gaanacdn.com/gn_img/albums/YoEWlabzXB/oEWlj5gYKz/size_xxl_1586752323.webp"
+                },
+                {
+                    name: "Feeling You",
+                    singer: "Raftaar x Harjas",
+                    path: "https://mp3.filmisongs.com/go.php?id=Damn%20Song%20Raftaar%20Ft%20KrSNa.mp3",
+                    image:
+                        "https://a10.gaanacdn.com/gn_img/albums/YoEWlabzXB/oEWlj5gYKz/size_xxl_1586752323.webp"
+                }
+            ],
+            render: function () {
+                // console.log(this.songs);
+                const htmls = this.songs.map(song => {
+                    return `<div class="song">
+                    <div class="thumb"
+                        style="background-image: url('${song.image}')">
+                    </div>
+                    <div class="body">
+                        <h3 class="title">${song.name}</h3>
+                        <p class="author">${song.singer}</p>
+                    </div>
+                    <div class="option">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </div>
+                    </div>
+                    `
+                })
+                $('.playlist').innerHTML = htmls.join('');
+            },
+            defineProperties: function () {
+                Object.defineProperty(this, "currentSong", {
+                    get: function () {
+                        return this.songs[this.currentIndex];
+                    }
+                })
+            },
+            loadCurrentSong: function () {
+                heading.textContent = this.currentSong.name;
+                cd_thumb.style.backgroundImage = `url(${this.currentSong.image})`;
+                audio.src = this.currentSong.path;
+            },
+            handleEvents: function () {
+                const _this = this;
+                const cdWidth = cd.offsetWidth;
+
+                // Xử lý phóng to thu nhỏ khi scroll cd
+                document.onscroll = function () {
+                    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+                    const newWidth = (cdWidth - scrollTop) > 0 ? cdWidth - scrollTop : 0;
+                    cd.style.width = newWidth + 'px';
+                    cd.style.opacity = newWidth / cdWidth;
+                };
+
+                btnPlaying.onclick = function() {
+                    if (_this.isPlaying) {
+                        audio.pause();
+                    } else {
+                        audio.play();
+                    }   
+                }
+                
+                audio.onplay = function() {
+                    _this.isPlaying = true;
+                    player.classList.add("playing");
+                }
+                
+                audio.onpause = function() {
+                    _this.isPlaying = false;
+                    player.classList.remove("playing");
+                }
+                
+
+                audio.ontimeupdate = function() {
+                    if (audio.duration) {
+                        const progressPercentage = Math.floor(audio.currentTime / audio.duration * 100);
+                        progress.value = progressPercentage;
+                    }
+                }
+
+                progress.onchange = function(e) {
+                    const seekTime = (e.target.value / 100) * audio.duration
+                    audio.currentTime = seekTime;
+                }
+
+            },
+            start: function () {
+
+                // Định nghĩa object currentSong dùng để load bài hát đang play
+                this.defineProperties();
+
+                // Render các bài hát
+                this.render();
+
+                // Load bài nhạc hiện tại
+                this.loadCurrentSong();
+
+                // Lắng nghe xử lý các sự kiện events (DOM events)
+                this.handleEvents();
+            }
+        }
+        app.start();
+    </script>
+    <!-- Design from: https://static.collectui.com/shots/3671744/musicloud-revolutionary-app-for-music-streaming-large -->
+</body>
+
+</html>
