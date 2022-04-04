@@ -1,9 +1,10 @@
 # Code Music Player written by Javascript - F8
 
+## Description
 
 
 
-# Main features
+## Main features
 
 1. Render song
 2. Scroll top 
@@ -17,7 +18,7 @@
 10. Download music
 11. Load config setting when we reload the page every time
 
-# Keyword
+## Keyword
 
 1. bind(document)
 2. localStorage
