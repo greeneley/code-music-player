@@ -1,5 +1,5 @@
 :root {
-    --primary-color: #ec1f55;
+    --primary-color: #432275;
     --text-color: #333;
   }
   
@@ -148,9 +148,10 @@
     background-color: var(--primary-color);
   }
   
-  .song:active {
+  .song:not(.active):hover {
     background-color: rgba(0, 0, 0, 0.1);
   }
+
   
   .song.active .option,
   .song.active .author,
@@ -187,3 +188,12 @@
     font-size: 18px;
   }
   
+  .song .option button {
+    background-color: #fff;
+    border: none;
+  }
+  .song .option > i:hover {
+    color: var(--text-color);
+    cursor: pointer;
+    z-index: 2;
+  }
