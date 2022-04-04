@@ -6,6 +6,8 @@ As we know, music players allow one to enjoy music in any browser and supports a
 
 ## Screenshot
 
+![](https://res.cloudinary.com/anhchangtoanhoc97/image/upload/v1649063846/Screenshot_from_2022-04-04_16-16-53_zdduem.png)
+
 ## Main features
 
 1. Render song
