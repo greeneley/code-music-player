@@ -74,73 +74,88 @@
         </div>
     </div>
     <script>
+
+        const PLAYER_STORAGE_KEY = "F8";
         const $ = document.querySelector.bind(document);
         const $$ = document.querySelectorAll.bind(document);
         const cd = $('.cd');
         const heading = $("header h2");
-        const cd_thumb = $(".cd-thumb");
+        const cdThumb = $(".cd-thumb");
         const audio = $("#audio");
         const btnPlaying = $('.btn-toggle-play');
         const player = $('.player');
         const progress = $('#progress');
+        const btnNext = $('.btn-next');
+        const btnPrev = $('.btn-prev');
+        const btnRandom = $('.btn-random');
+        const btnRepeat = $('.btn-repeat');
+        const playlist = $('.playlist');
         const app = {
+            
             currentIndex: 0,
             isPlaying: false,
+            isRandom: false,
+            isRepeat: false,
+            config: JSON.parse(localStorage.getItem(PLAYER_STORAGE_KEY)) || {},
             songs: [
                 {
-                    name: "Click Pow Get Down",
-                    singer: "Raftaar x Fortnite",
-                    path: "https://mp3.filmisongs.com/go.php?id=Damn%20Song%20Raftaar%20Ft%20KrSNa.mp3",
-                    image: "https://i.ytimg.com/vi/jTLhQf5KJSc/maxresdefault.jpg"
+                    name: "Đế Vương",
+                    singer: "Đình Dũng",
+                    path: "https://c1-ex-swe.nixcdn.com/NhacCuaTui1024/DeVuong-DinhDungACV-7121634.mp3?st=CX8cyLauI9Qlp9-Pp2APTg&e=1649040138&download=true",
+                    image: "https://avatar-nct.nixcdn.com/song/2021/11/29/a/9/5/0/1638180197658.jpg"
                 },
                 {
-                    name: "Tu Phir Se Aana",
-                    singer: "Raftaar x Salim Merchant x Karma",
-                    path: "https://mp3.filmisongs.com/go.php?id=Damn%20Song%20Raftaar%20Ft%20KrSNa.mp3",
+                    name: "Chạy Về Nơi Phía Anh",
+                    singer: " Khắc Việt",
+                    path: "https://c1-ex-swe.nixcdn.com/NhacCuaTui1025/ChayVeNoiPhiaAnh-KhacViet-7129688.mp3?st=hwfuMJ6YVnOquX2a8ALCzw&e=1649077359&download=true",
                     image:
-                        "https://1.bp.blogspot.com/-kX21dGUuTdM/X85ij1SBeEI/AAAAAAAAKK4/feboCtDKkls19cZw3glZWRdJ6J8alCm-gCNcBGAsYHQ/s16000/Tu%2BAana%2BPhir%2BSe%2BRap%2BSong%2BLyrics%2BBy%2BRaftaar.jpg"
+                        "https://avatar-nct.nixcdn.com/song/2022/02/10/2/a/7/7/1644475457323.jpg"
                 },
                 {
-                    name: "Naachne Ka Shaunq",
-                    singer: "Raftaar x Brobha V",
+                    name: "Có Em Đây",
+                    singer: "Như Việt",
                     path:
-                        "https://mp3.filmisongs.com/go.php?id=Damn%20Song%20Raftaar%20Ft%20KrSNa.mp3",
-                    image: "https://i.ytimg.com/vi/QvswgfLDuPg/maxresdefault.jpg"
+                        "https://c1-ex-swe.nixcdn.com/NhacCuaTui1025/CoEmDay-NhuViet-7126614.mp3?st=a5yaCk1QZHuR1S0sWbAyxQ&e=1649066847",
+                    image: "https://avatar-nct.nixcdn.com/song/2022/01/12/f/c/b/f/1641968755745.jpg"
                 },
                 {
-                    name: "Mantoiyat",
-                    singer: "Raftaar x Nawazuddin Siddiqui",
-                    path: "https://mp3.filmisongs.com/go.php?id=Damn%20Song%20Raftaar%20Ft%20KrSNa.mp3",
+                    name: "Tệ Thật, Anh Nhớ Em",
+                    singer: "Thanh Hưng",
+                    path: "https://f9-stream.nixcdn.com/NhacCuaTui1026/TeThatAnhNhoEm-ThanhHung-7132634.mp3?st=YfqDw_WZXrP_gVAPIU7sNw&e=1649054315&download=true",
                     image:
-                        "https://a10.gaanacdn.com/images/song/39/24225939/crop_480x480_1536749130.jpg"
+                        "https://avatar-nct.nixcdn.com/song/2022/03/03/0/1/3/6/1646267009685.jpg"
                 },
                 {
-                    name: "Aage Chal",
-                    singer: "Raftaar",
-                    path: "https://mp3.filmisongs.com/go.php?id=Damn%20Song%20Raftaar%20Ft%20KrSNa.mp3",
+                    name: "Thuận Theo Ý Trời",
+                    singer: "Bùi Anh Tuấn",
+                    path: "https://c1-ex-swe.nixcdn.com/NhacCuaTui992/ThuanTheoYTroi-BuiAnhTuan-6150266.mp3?st=mrMrUWGBL5RGfWX7CA49YA&e=1648880930&download=true",
                     image:
-                        "https://a10.gaanacdn.com/images/albums/72/3019572/crop_480x480_3019572.jpg"
+                        "https://avatar-nct.nixcdn.com/song/2019/11/28/1/e/6/0/1574913186035.jpg"
                 },
                 {
-                    name: "Damn",
-                    singer: "Raftaar x kr$na",
+                    name: "Tìm Được Nhau Khó Thế Nào",
+                    singer: "Anh Tú",
                     path:
-                        "https://mp3.filmisongs.com/go.php?id=Damn%20Song%20Raftaar%20Ft%20KrSNa.mp3",
+                        "https://c1-ex-swe.nixcdn.com/NhacCuaTui1025/TimDuocNhauKhoTheNaoOriginalMovieSoundtrackFromChiaKhoaTramTy-AnhTuTheVoice-7127088.mp3?st=iecNnFbMyYJ7PtG9uRpAWw&e=1648965315&download=true",
                     image:
-                        "https://a10.gaanacdn.com/gn_img/albums/YoEWlabzXB/oEWlj5gYKz/size_xxl_1586752323.webp"
+                        "https://avatar-nct.nixcdn.com/song/2022/01/17/6/c/e/0/1642406689812.jpg"
                 },
                 {
-                    name: "Feeling You",
-                    singer: "Raftaar x Harjas",
-                    path: "https://mp3.filmisongs.com/go.php?id=Damn%20Song%20Raftaar%20Ft%20KrSNa.mp3",
+                    name: "Bảy Anh Em",
+                    singer: "Minh Huy,Pjnboys,Phức Hợp Hood",
+                    path: "https://c1-ex-swe.nixcdn.com/NhacCuaTui1025/BayAnhEm-MinhHuyPjnboysPhucHopHood-7126898.mp3?st=UUKNQ7l4R_-53eautHUQuQ&e=1648878244&download=true",
                     image:
-                        "https://a10.gaanacdn.com/gn_img/albums/YoEWlabzXB/oEWlj5gYKz/size_xxl_1586752323.webp"
+                        "https://avatar-nct.nixcdn.com/song/2022/01/14/1/c/7/f/1642142851414.jpg"
                 }
             ],
+            setConfig: function(key, value) {
+                this.config[key] = value;
+                localStorage.setItem(PLAYER_STORAGE_KEY, JSON.stringify(this.config));
+            },
             render: function () {
-                // console.log(this.songs);
-                const htmls = this.songs.map(song => {
-                    return `<div class="song">
+                
+                const htmls = this.songs.map((song,index) => {
+                    return `<div class="song ${ index === this.currentIndex ? 'active': '' }" data-index="${index}">
                     <div class="thumb"
                         style="background-image: url('${song.image}')">
                     </div>
@@ -154,7 +169,8 @@
                     </div>
                     `
                 })
-                $('.playlist').innerHTML = htmls.join('');
+
+                playlist.innerHTML = htmls.join('');
             },
             defineProperties: function () {
                 Object.defineProperty(this, "currentSong", {
@@ -165,12 +181,24 @@
             },
             loadCurrentSong: function () {
                 heading.textContent = this.currentSong.name;
-                cd_thumb.style.backgroundImage = `url(${this.currentSong.image})`;
+                cdThumb.style.backgroundImage = `url(${this.currentSong.image})`;
                 audio.src = this.currentSong.path;
             },
             handleEvents: function () {
+
                 const _this = this;
                 const cdWidth = cd.offsetWidth;
+
+                // Rotate cd
+                const cdThumbAnimate = cdThumb.animate([
+                    {
+                        transform: "rotate(360deg)"
+                    }
+                ], {
+                    duration: 10000,
+                    iterations: Infinity
+                });
+                cdThumbAnimate.pause();
 
                 // Xử lý phóng to thu nhỏ khi scroll cd
                 document.onscroll = function () {
@@ -191,14 +219,16 @@
                 audio.onplay = function() {
                     _this.isPlaying = true;
                     player.classList.add("playing");
+                    cdThumbAnimate.play();
                 }
                 
                 audio.onpause = function() {
                     _this.isPlaying = false;
                     player.classList.remove("playing");
+                    cdThumbAnimate.pause();
                 }
                 
-
+                
                 audio.ontimeupdate = function() {
                     if (audio.duration) {
                         const progressPercentage = Math.floor(audio.currentTime / audio.duration * 100);
@@ -211,8 +241,101 @@
                     audio.currentTime = seekTime;
                 }
 
+                btnNext.onclick = function() {
+                    if (_this.isRandom) {
+                        _this.playrandomSong();
+                    } else {
+                        _this.next();
+                    }
+                    audio.play();
+                    _this.render();
+                    _this.scrollToViewSong();
+                }
+
+                btnPrev.onclick = function() {
+                    if (_this.isRandom) {
+                        _this.playrandomSong();
+                    } else {
+                        _this.previous();
+                    }
+                    audio.play();
+                }
+
+                btnRandom.onclick = function() {
+                    _this.isRandom = !_this.isRandom;
+                    _this.setConfig('isRandom', _this.isRandom);
+                    btnRandom.classList.toggle('active', _this.isRandom);
+                }
+
+                btnRepeat.onclick = function() {
+                    _this.isRepeat = !_this.isRepeat;
+                    _this.setConfig('isRepeat', _this.isRepeat);
+                    btnRepeat.classList.toggle('active', _this.isRepeat);
+                }
+
+                // Xu ly next song khi audio ended
+                audio.onended = function() {
+                    if (_this.isRepeat) {
+                        audio.play();
+                    } else {
+                        btnNext.click();
+                    }
+                }
+
+                playlist.onclick = function(e) {
+                    const songNode = e.target.closest('.song:not(.active)');
+                    if (songNode || e.target.closest('.option')) {
+                        
+                        // Xử lý event mở một bài nhạc khi click vào một bài nhạc
+                        if (songNode) {
+                            _this.currentIndex = parseInt(songNode.dataset.index);
+                            _this.loadCurrentSong();
+                            _this.render();
+                            audio.play();
+                        }
+                        
+                    }
+                }
+
+            },
+            loadConfig: function() {
+                this.isRandom = this.config.isRandom;
+                this.isRepeat = this.config.isRepeat;
+            },
+            next: function() {
+                this.currentIndex++;
+                if (this.currentIndex > this.songs.length - 1) {
+                    this.currentIndex = 0;
+                }
+                this.loadCurrentSong();
+            },
+            previous: function() {
+                this.currentIndex--;
+                if (this.currentIndex < 0) {
+                    this.currentIndex = this.songs.length - 1;
+                }
+                this.loadCurrentSong();
+            },
+            playrandomSong: function() {
+                let newIndex;
+                do {
+                    newIndex = Math.floor(Math.random() * this.songs.length);
+                } while (newIndex === this.currentIndex)
+                this.currentIndex = newIndex;
+                this.loadCurrentSong();
+            },
+            scrollToViewSong: function() {
+                setTimeout(() => {
+                    $(".song.active").scrollIntoView({
+                        behavior: "smooth",
+                        block: "center"
+                    })
+                }, 300)
             },
             start: function () {
+
+                // Load config
+                this.loadConfig();
 
                 // Định nghĩa object currentSong dùng để load bài hát đang play
                 this.defineProperties();
@@ -225,6 +348,11 @@
 
                 // Lắng nghe xử lý các sự kiện events (DOM events)
                 this.handleEvents();
+
+                // Load sự kiện Random & Repeat
+                btnRandom.classList.toggle('active', this.config.isRandom);
+                btnRepeat.classList.toggle('active', this.config.isRepeat);
+
             }
         }
         app.start();
