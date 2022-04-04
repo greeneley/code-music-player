@@ -2,7 +2,9 @@
 
 ## Description
 
+As we know, music players allow one to enjoy music in any browser and supports a lot of the features of an offline music player. So we will be creating a music player with a clean interface that can play music in the browser.
 
+## Screenshot
 
 ## Main features
 
