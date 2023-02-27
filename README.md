@@ -1,14 +1,12 @@
 # Code Music Player written by Javascript - F8
 
-## Description
-
 As we know, music players allow one to enjoy music in any browser and supports a lot of the features of an offline music player. So we will be creating a music player with a clean interface that can play music in the browser.
 
-## Screenshot
+This was also my first project in my adventure of Frontend :D 
 
 ![](https://res.cloudinary.com/anhchangtoanhoc97/image/upload/v1649063846/Screenshot_from_2022-04-04_16-16-53_zdduem.png)
 
-## Main features
+## Features
 
 1. Render song
 2. Scroll top 
@@ -22,6 +20,16 @@ As we know, music players allow one to enjoy music in any browser and supports a
 10. Download music
 11. Load config setting when we reload the page every time
 
+
+## Tech Stack
+
+HTML, CSS & Javascript
+
+
+## Installation
+
+Just open index.html to see it
+
 ## Keyword
 
 1. bind(document)
@@ -34,5 +42,14 @@ As we know, music players allow one to enjoy music in any browser and supports a
 8. toggle
 9. _this.isRepead = !_this.isRepeat;
 10. setTimeOut()
-11. scrollIntoView()
+11. scrollIntoView() 
+
+## Authors
+
+[@greeneley](https://www.github.com/greeneley)
+
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
 
