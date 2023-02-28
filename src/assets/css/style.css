@@ -15,13 +15,15 @@
   
   html {
     box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+    font-family: -apple-system, Poppins , sans-serif;
   }
   
   .player {
     position: relative;
     max-width: 480px;
     margin: 0 auto;
+    align-items: center;
+    justify-content: center;
   }
   
   .player .icon-pause {
@@ -37,9 +39,9 @@
   }
   
   .dashboard {
-    padding: 16px 16px 14px;
-    background-color: #fff;
     position: fixed;
+    padding: 16px;
+    background-color: #fff;
     top: 0;
     width: 100%;
     max-width: 480px;
@@ -54,12 +56,10 @@
   
   header h4 {
     color: var(--primary-color);
-    font-size: 12px;
   }
   
   header h2 {
     color: var(--text-color);
-    font-size: 20px;
   }
   
   /* CD */
@@ -83,7 +83,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    padding: 18px 0 8px 0;
+    padding: 18px 0 8px;
   }
   
   .control .btn {
@@ -121,7 +121,7 @@
   
   .progress::-webkit-slider-thumb {
     -webkit-appearance: none;
-    appearance: none;
+    appearance: auto;
     width: 12px;
     height: 6px;
     background-color: var(--primary-color);
@@ -130,8 +130,9 @@
   
   /* PLAYLIST */
   .playlist {
-    margin-top: 408px;
-    padding: 12px;
+    margin-top: 412px;
+    padding-top: 12px
+    /*padding: 12px;*/
   }
   
   .song {
